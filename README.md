@@ -1,6 +1,6 @@
 # jsonapi-home
 
-  - [![Build](http://img.shields.io/travis-ci/krainboltgreene/jsonapi-home.svg?style=flat-square)](https://travis-ci.org/krainboltgreene/jsonapi-home)
+  - [![Build](http://img.shields.io/travis-ci/krainboltgreene/jsonapi-home.rb.svg?style=flat-square)](https://travis-ci.org/krainboltgreene/jsonapi-home)
   - [![Downloads](http://img.shields.io/gem/dtv/jsonapi-home.svg?style=flat-square)](https://rubygems.org/gems/jsonapi-home)
   - [![Version](http://img.shields.io/gem/v/jsonapi-home.svg?style=flat-square)](https://rubygems.org/gems/jsonapi-home)
 
