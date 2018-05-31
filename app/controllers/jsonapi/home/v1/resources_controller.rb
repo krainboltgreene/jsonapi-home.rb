@@ -14,7 +14,6 @@ module JSONAPI
         def index
           realization = JSONAPI::Realizer.index(
             params,
-            scope: JSONAPI::Home::V1::Resource.with(main_app.routes.url_helpers.root_url),
             headers: request.headers,
             type: :jsonapi_home_resources
           )
@@ -25,7 +24,6 @@ module JSONAPI
         def show
           realization = JSONAPI::Realizer.show(
             params,
-            scope: JSONAPI::Home::V1::Resource.with(jsonapi_home_url),
             headers: request.headers,
             type: :jsonapi_home_resources
           )

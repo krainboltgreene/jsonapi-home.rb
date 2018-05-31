@@ -22,14 +22,6 @@ module JSONAPI
           all.index_by(&:id).fetch(id)
         end
 
-        def self.with(url)
-          tap { @url = url }
-        end
-
-        def self.url
-          @url
-        end
-
         private_class_method def self.routes
           [
             *Rails.application.routes.routes.to_a,
@@ -100,7 +92,7 @@ module JSONAPI
         private def location
           configuration.fetch(:location) ||
           ENV.fetch("HOME_LOCATION", nil) ||
-          self.class.url
+          raise StandardError, "need a location to function"
         end
 
         private def payload
