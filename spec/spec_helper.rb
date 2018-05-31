@@ -1,6 +1,6 @@
-require File.expand_path(File.join("..", "..", "test", "dummy", "config", "environment.rb"), __FILE__)
+require File.expand_path(File.join("..", "..", "spec", "dummy", "config", "environment.rb"), __FILE__)
 
-ActiveRecord::Migrator.migrations_paths = [File.expand_path(File.join("..", "..", "test", "dummy", "db", "migrate"), __FILE__)]
+ActiveRecord::Migrator.migrations_paths = [File.expand_path(File.join("..", "..", "spec", "dummy", "db", "migrate"), __FILE__)]
 
 # require "rails/test_help"
 

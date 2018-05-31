@@ -90,9 +90,7 @@ module JSONAPI
         end
 
         private def location
-          configuration.fetch(:location) ||
-          ENV.fetch("HOME_LOCATION", nil) ||
-          raise StandardError, "need a location to function"
+          configuration.fetch(:location) || ENV.fetch("HOME_LOCATION", nil) || raise(StandardError, "need a location to function")
         end
 
         private def payload
