@@ -7,11 +7,11 @@ module JSONAPI
         CREATED_AT = Time.now
         private_constant :CREATED_AT
 
-        attr_reader :route
+        attr_accessor :route
         private :route
 
         def self.all
-          routes.map(&method(:new)).select(&:valid?)
+          routes.map {|route| new(route: route)}.select(&:valid?)
         end
 
         def self.where(attributes)
@@ -22,15 +22,19 @@ module JSONAPI
           all.index_by(&:id).fetch(id)
         end
 
+        def self.with(url)
+          tap { @url = url }
+        end
+
+        def self.url
+          @url
+        end
+
         private_class_method def self.routes
           [
             *Rails.application.routes.routes.to_a,
             *Rails::Engine.subclasses.map(&:instance).map(&:routes).map(&:routes).map(&:to_a).flatten
           ]
-        end
-
-        def initialize(route)
-          @route = route
         end
 
         def id
@@ -77,12 +81,6 @@ module JSONAPI
           File.join(location, path)
         end
 
-        def location
-          configuration.fetch(:location) ||
-          ENV.fetch("HOME_LOCATION", nil) ||
-          Rails.application.routes.url_helpers.root_path
-        end
-
         def mediatype
           JSONAPI::MEDIA_TYPE
         end
@@ -97,6 +95,12 @@ module JSONAPI
 
         def valid?
           !route.internal && defaults.any? && controller.present? && configuration
+        end
+
+        private def location
+          configuration.fetch(:location) ||
+          ENV.fetch("HOME_LOCATION", nil) ||
+          self.class.url
         end
 
         private def payload
