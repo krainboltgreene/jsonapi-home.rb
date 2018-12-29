@@ -19,14 +19,14 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "1.16.1"
+  spec.add_development_dependency "bundler", "1.16.2"
   spec.add_development_dependency "rspec", "3.7.0"
   spec.add_development_dependency "rake", "12.3.1"
   spec.add_development_dependency "pry", "0.11.3"
   spec.add_development_dependency "pry-doc", "0.13.3"
   spec.add_development_dependency "sqlite3", "1.3.13"
   spec.add_runtime_dependency "rails", "~> 5.1"
-  spec.add_runtime_dependency "jsonapi-realizer", "~> 4.1"
-  spec.add_runtime_dependency "jsonapi-serializers", "~> 1.0"
+  spec.add_runtime_dependency "jsonapi-realizer", "6.0.0.rc1"
+  spec.add_runtime_dependency "jsonapi-materializer", "1.0.0.rc2"
   spec.add_runtime_dependency "array-where", "~> 2.0"
 end
