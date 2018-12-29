@@ -10,8 +10,8 @@ module JSONAPI
 
     DEFAULT_DESCRIPTION = "A JSON:API resource as defined at https://www.jsonapi.org"
 
-    require_relative "home/inflector"
-    require_relative "home/engine"
+    require_relative("home/inflector")
+    require_relative("home/engine")
 
     class_methods do
       def discoverable(version:, namespace:, deprecated: nil, description: DEFAULT_DESCRIPTION, documentation: nil, location: nil, jsonapi_version: "1.0")

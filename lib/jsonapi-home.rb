@@ -1,3 +1,3 @@
 module JSONAPI
-  require_relative "jsonapi/home"
+  require_relative("jsonapi/home")
 end
