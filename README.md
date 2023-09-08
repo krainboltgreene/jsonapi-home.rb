@@ -1,9 +1,5 @@
 # jsonapi-home
 
-  - [![Build](http://img.shields.io/travis-ci/krainboltgreene/jsonapi-home.rb.svg?style=flat-square)](https://travis-ci.org/krainboltgreene/jsonapi-home.rb)
-  - [![Downloads](http://img.shields.io/gem/dtv/jsonapi-home.svg?style=flat-square)](https://rubygems.org/gems/jsonapi-home)
-  - [![Version](http://img.shields.io/gem/v/jsonapi-home.svg?style=flat-square)](https://rubygems.org/gems/jsonapi-home)
-
 An implementation of an experimental JSON:API-Home specification, which is a combination of the [JSONHome](https://tools.ietf.org/html/draft-nottingham-json-home-06) and [json:api](https://www.jsonapi.org).
 
 
@@ -695,7 +691,7 @@ module V1
 end
 ```
 
-### Documentation HREF
+### Documentation href
 
 Every endpoint can link to the human documentation for that endpoint:
 
@@ -711,7 +707,7 @@ module V1
 end
 ```
 
-### JSONAPI Version
+### json:api Version
 
 Finally you can specify the specific version of JSON:API this endpoint uses:
 
@@ -731,13 +727,9 @@ Of course, these are all just descriptive. jsonapi-home does not enforce these c
 
 ## Installing
 
-Add this line to your application's Gemfile:
+Run this command:
 
-    gem "jsonapi-home", "1.0.0"
-
-And then execute:
-
-    $ bundle
+    $ bundle add jsonapi-home
 
 Or install it yourself with:
 
@@ -746,7 +738,7 @@ Or install it yourself with:
 
 ## Contributing
 
-  1. Read the [Code of Conduct](/CONDUCT.md)
+  1. Read the [Code of Conduct](/CONDUCT)
   2. Fork it
   3. Create your feature branch (`git checkout -b my-new-feature`)
   4. Commit your changes (`git commit -am 'Add some feature'`)

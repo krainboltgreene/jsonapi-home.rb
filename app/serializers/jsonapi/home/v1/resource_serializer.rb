@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module JSONAPI
   module Home
     module V1
@@ -33,7 +35,7 @@ module JSONAPI
                   href: object.documentation
                 }
               }
-            end,
+            end
           ].compact.reduce(&:merge)
         end
       end

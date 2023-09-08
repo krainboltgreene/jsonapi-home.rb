@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 module JSONAPI
   module Home
     module V1
       class Resource
         include ActiveModel::Model
 
-        CREATED_AT = Time.now
+        CREATED_AT = Time.zone.now
         private_constant :CREATED_AT
 
         attr_accessor :route
         private :route
 
         def self.all
-          routes.map {|route| new(route: route)}.select(&:valid?)
+          routes.map { |route| new(route:) }.select(&:valid?)
         end
 
         def self.where(attributes)
@@ -25,7 +27,7 @@ module JSONAPI
         private_class_method def self.routes
           [
             *Rails.application.routes.routes.to_a,
-            *Rails::Engine.subclasses.map(&:instance).map(&:routes).map(&:routes).map(&:to_a).flatten
+            *Rails::Engine.subclasses.flat_map { |x| x.instance.routes.routes.to_a }
           ]
         end
 
@@ -65,9 +67,7 @@ module JSONAPI
           configuration.fetch(:version)
         end
 
-        def verb
-          route.verb
-        end
+        delegate :verb, to: :route
 
         def href
           File.join(location, path)
@@ -82,7 +82,7 @@ module JSONAPI
         end
 
         def updated_at
-          Time.now
+          Time.zone.now
         end
 
         def valid?
@@ -94,17 +94,17 @@ module JSONAPI
         end
 
         private def payload
-          route.parts.without(:format).map {|part| {part => "{#{part}}"}}.reduce(:merge) || {}
+          route.parts.without(:format).map { |part| { part => "{#{part}}" } }.reduce(:merge) || {}
         end
 
         private def path
-          URI.decode(route.format(payload))
+          CGI.unescape(route.format(payload))
         end
 
         private def controller
           controller_name.constantize
-        rescue NameError => exception
-          Rails.logger.debug("jsonapi-home saw a route and tried to find #{controller_name}")
+        rescue NameError
+          Rails.logger.debug { "jsonapi-home saw a route and tried to find #{controller_name}" }
         end
 
         private def action

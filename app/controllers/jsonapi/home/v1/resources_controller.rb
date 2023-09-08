@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module JSONAPI
   module Home
     module V1
@@ -33,13 +35,13 @@ module JSONAPI
 
         private def serialize(realization)
           JSONAPI::Serializer.serialize(
-            if realization.respond_to?(:models) then realization.models else realization.model end,
+            realization.respond_to?(:models) ? realization.models : realization.model,
             is_collection: realization.respond_to?(:models),
             meta: serialized_metadata,
             links: serialized_links,
             jsonapi: serialized_jsonapi,
-            fields: if realization.fields.any? then realization.fields end,
-            include: if realization.includes.any? then realization.includes end
+            fields: (realization.fields if realization.fields.any?),
+            include: (realization.includes if realization.includes.any?)
           )
         end
 
@@ -63,10 +65,10 @@ module JSONAPI
             if ENV.key?("HOME_DOCUMENTATION_HREF")
               {
                 documentation: {
-                  href:  "#{ENV.fetch("HOME_DOCUMENTATION_HREF")}"
+                  href: ENV.fetch("HOME_DOCUMENTATION_HREF").to_s
                 }
               }
-            end,
+            end
           ].compact.reduce(&:merge)
         end
 
